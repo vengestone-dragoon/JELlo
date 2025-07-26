@@ -196,9 +196,12 @@ export const Primitives = {
         applyEventListeners(result, messageName, messageType);
         return result;
     },
-    textarea: (attributes = {}) => {
+    textarea: (statevalue, attributes = {}, messageName = null, messageType = null) => {
         let result = document.createElement("textarea");
         applyAttributes(result, attributes);
+        if (statevalue !== null) {
+            result.value = statevalue;
+        }
         return result;
     },
     select: (content = [], attributes = {}, messageName = null, messageType = null) => {
@@ -214,9 +217,17 @@ export const Primitives = {
         appendChildren(result, content);
         return result;
     },
-    input: (attributes = {}, messageName = null, messageType = null) => {
+    input: (stateValue, attributes = {}, messageName = null, messageType = null) => {
         let result = document.createElement("input");
         applyAttributes(result, attributes);
+        const inputType = attributes.type;
+        if (inputType === "checkbox") {
+            result.checked = !!stateValue;
+        } else if (inputType === "radio") {
+            result.checked = (stateValue === attributes.value);
+        } else if (stateValue !== null) {
+            result.value = stateValue;
+        }
         applyEventListeners(result, messageName, messageType);
         return result;
     },
