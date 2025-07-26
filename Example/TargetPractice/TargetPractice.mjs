@@ -3,6 +3,8 @@ export class TargetPractice extends JELloElement {
     constructor() {
         super();
         this.count=0;
+        this.misscount=0;
+        this.hitpercentage=0;
         this.target = {
             x: 50,
             y: 50,
@@ -31,9 +33,15 @@ export class TargetPractice extends JELloElement {
                 } else {
                     this.lastClick = Date.now();
                 }
+                this.hitpercentage = Math.round(100*(this.count/(this.count + this.misscount)));
                 this.target.x = Math.max(Math.min(Math.round((Math.random()%100)*100),90),10);
                 this.target.y = Math.max(Math.min(Math.round((Math.random()%100)*100),90),10);
                 break;
+            }
+            case "missedButton": {
+                this.misscount++;
+                this.hitpercentage = Math.round(100*(this.count/(this.count + this.misscount)));
+                break
             }
         }
         return {name: JELloEvents.reRender}
@@ -42,18 +50,32 @@ export class TargetPractice extends JELloElement {
         return [
             Primitives.div([
                 Primitives.h1(["Target Practice"], {class: "title"}),
-                Primitives.span([
-                    "Times clicked: ",
-                    this.count,
-                ], {
+                Primitives.div([
+                    Primitives.span([
+                        "Times clicked: ",
+                        this.count,
+                    ]),
+                    Primitives.span([
+                        "Times Missed: ",
+                        this.misscount,
+                    ]),
+                    Primitives.span([
+                        "Hit Average: ",
+                        this.hitpercentage,
+                    ])
+                ],{
                     class: "clickCount"
                 }),
                 Primitives.span([
                     "Click Speed Average: ",
                     this.clickAverage,
+                    " ms",
                 ], {
                     class: "clickAverage"
                 }),
+                Primitives.button([],{
+                    class: "backdrop",
+                }, "missedButton",InputEvents.click),
                 Primitives.button([],{
                     class: "target",
                     style: "top: calc("

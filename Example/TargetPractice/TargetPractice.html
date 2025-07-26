@@ -29,6 +29,8 @@
       position: absolute;
       left: 5pt;
       bottom: 5pt;
+      display: flex;
+      flex-direction: column;
     }
     .clickAverage {
       position: absolute;
@@ -45,6 +47,13 @@
       border-style: solid;
       border-width: 2pt;
       border-color: #f03232;
+    }
+    .backdrop {
+      position: absolute;
+      inset: 0;
+      appearance: none;
+      border: none;
+      background: none;
     }
     .target:before, .target:after {
       content: "";
