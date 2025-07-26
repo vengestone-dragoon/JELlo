@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script type="module" src="TargetPractice.mjs">
+  </script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #486036
+    }
+    .title {
+      position: absolute;
+      top: 5pt;
+      left: 5pt;
+    }
+    .view {
+      position: absolute;
+      inset: 0;
+    }
+    .posReport {
+      position: absolute;
+      right: 5pt;
+      bottom: 5pt;
+    }
+    .clickCount {
+      position: absolute;
+      left: 5pt;
+      bottom: 5pt;
+    }
+    .clickAverage {
+      position: absolute;
+      top: 5pt;
+      right: 5pt;
+    }
+    .target {
+      position: absolute;
+      appearance: none;
+      box-sizing: border-box;
+      width: 32pt;
+      height: 32pt;
+      border-radius: 50%;
+      border-style: solid;
+      border-width: 2pt;
+      border-color: #f03232;
+    }
+    .target:before, .target:after {
+      content: "";
+      position: absolute;
+      border-color: #f03232;
+      border-style: solid;
+      border-width: 1pt;
+    }
+    .target:before {
+      top: -7pt;
+      left: calc(50% - 0.5pt);
+      width: 0;
+      height: calc(100% + 13pt);
+    }
+    .target:after {
+      top: calc(50% - 0.5pt);
+      left: -7pt;
+      width: calc(100% + 13pt);
+      height: 0;
+    }
+  </style>
+</head>
+<body>
+<target-practice></target-practice>
+</body>
+</html>
