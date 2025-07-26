@@ -5,7 +5,7 @@ export const JELloEvents = {
 export class JELloElement extends HTMLElement {
     constructor() {
         super();
-        this._update = (message) => {};
+        this._update = () => {};
         this._view = () => {};
     }
     connectedCallback(update,view) {
@@ -202,6 +202,7 @@ export const Primitives = {
         if (statevalue !== null) {
             result.value = statevalue;
         }
+        applyEventListeners(result, messageName, messageType);
         return result;
     },
     select: (content = [], attributes = {}, messageName = null, messageType = null) => {
@@ -332,12 +333,12 @@ export const Primitives = {
     },
 }
 
-function applyAttributes(element, attributes = {}) {
+export function applyAttributes(element, attributes = {}) {
     for (let key in attributes) {
         element.setAttribute(key, attributes[key]);
     }
 }
-function appendChildren(element, content = []) {
+export function appendChildren(element, content = []) {
     for (let item of content) {
         if (item instanceof HTMLElement) {
             element.appendChild(item);
@@ -346,7 +347,7 @@ function appendChildren(element, content = []) {
         }
     }
 }
-function applyEventListeners(element, messageName, messageType) {
+export function applyEventListeners(element, messageName, messageType) {
     if (messageName && messageType) {
         const resultEvent = (event) => {
             dispatchEvent(new CustomEvent("JELlo", {
